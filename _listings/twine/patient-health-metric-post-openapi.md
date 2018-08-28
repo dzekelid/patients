@@ -1,9 +1,47 @@
+---
 swagger: "2.0"
 x-collection-name: Twine
-x-complete: 1
+x-complete: 0
 info:
-  title: Twine
-  description: -overviewthe-twine-health-api-is-restful-api--the-requests-and-responses-are-formated-according-to-the-json-apihttpjsonapi-orgformat1-0-specification-in-addition-to-this-documentation-we-also-provide-an-openapihttpsgithub-comoaiopenapispecificationblobmasterversions2-0-md-yaml-file-describing-the-api-twine-api-specificationswagger-yaml--authenticationauthentication-for-the-twine-api-is-based-on-the-oauth-2-0-authorization-frameworkhttpstools-ietf-orghtmlrfc6749--twine-currently-supports-grant-types-of-client-credentials-and-refresh-token-see-post-oauthtokenoperationcreatetoken-for-details-on-the-request-and-response-formats--redocinject-securitydefinitions-
+  title: Twine Create patient health metrics
+  description: |-
+    Create one or more patient health metrics.
+
+    Example for creating a patient health result with a patient specified using `meta.query` instead of `id`:
+
+    ```JSON
+      {
+        "data": {
+          "type": "patient_health_metric",
+           "attributes": {
+             "code": {
+               "system": "LOINC",
+               "value": "13457-7"
+             },
+             "type": "ldl_cholesterol",
+             "occurred_at": "2017-03-14T11:00:57.000Z",
+             "value": "121",
+             "unit": "mg/dl"
+          },
+          "relationships": {
+            "patient": {
+              "data": {
+                "type": "patient",
+                "meta": {
+                  "query": {
+                    "identifier": {
+                      "system": "medical-record-number",
+                      "value": "121212"
+                    },
+                    "organization": "58c4554710123c5c40dbab81"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ```
   version: 7.18.0
 host: api.twinehealth.com
 basePath: /pub
@@ -317,3 +355,17 @@ paths:
       - Plan
       - Summarya
       - Patient
+x-streamrank:
+  polling_total_time_average: 0
+  polling_size_download_average: 0
+  streaming_total_time_average: 0
+  streaming_size_download_average: 0
+  change_yes: 0
+  change_no: 0
+  time_percentage: 0
+  size_percentage: 0
+  change_percentage: 0
+  last_run: ""
+  days_run: 0
+  minute_run: 0
+---
